@@ -1,75 +1,88 @@
 import './App.css'
 
 function App() {
-  const skills = ['React', 'JavaScript', 'HTML/CSS', 'Git', 'Vite', 'UI/UX']
+  const skills = [
+    'React', 'JavaScript (ES6+)', 'HTML5 / CSS3', 'Vite',
+    'Python (Flask)', 'MySQL', 'MongoDB', 'Git / GitHub', 'RESTful API'
+  ]
 
   const projects = [
     {
-      title: '個人形象網站',
-      desc: '使用 React 與 Vite 打造，並透過 GitHub 與 Vercel 實現自動化 CI/CD 部署。',
-      tag: 'Web / DevOps',
+      title: '個人形象與線上履歷',
+      tag: 'React / Vite / Vercel',
+      desc: '規劃並實作響應式個人站，整合 Git 與 Vercel 自動化 CI/CD 流程，實現即時部署與版本控制。',
+      link: 'https://github.com/echidnax'
+    },
+    {
+      title: '圖書管理系統 (Library Management System)',
+      tag: 'Python Flask / MySQL / RESTful API',
+      desc: '設計關聯式資料庫結構與 DDL，撰寫 Flask 後端 API 串接 MySQL，實現書籍與借閱紀錄之查詢、新增與管理。',
       link: '#'
     },
     {
-      title: '特色專案展示',
-      desc: '這裡可以寫上你的專案摘要、使用的技術工具，以及解決了什麼問題。',
-      tag: 'Project',
-      link: '#'
-    },
-    {
-      title: '數位創作 / 作品收集',
-      desc: '展示插畫、設計稿或任何你想分享的作品集。',
-      tag: 'Portfolio',
+      title: '多架構資料庫實作練習',
+      tag: 'MongoDB / DuckDB / Neo4j',
+      desc: '探索 Document、Column 與 Graph 不同架構之 NoSQL 資料庫特性，進行資料建模與跨類型查詢演練。',
       link: '#'
     }
   ]
 
   return (
-    <div className="portfolio-container">
-      {/* 個人頂部簡介 */}
-      <header className="hero-section">
-        <div className="avatar-placeholder">ME</div>
-        <h1 className="name">Ting-Hsuan</h1>
-        <p className="title">Front-End Learner & Digital Creator</p>
-        <p className="bio">
-          熱愛打造實用的網頁介面與探索現代開發工具。正在持續累積作品與實戰經驗。
-        </p>
-      </header>
+    <div className="page-wrapper">
+      <main className="content-container">
+        {/* 個人 Header */}
+        <header className="header">
+          <div className="header-badge">Online Resume</div>
+          <h1 className="name">Ting-Hsuan</h1>
+          <p className="headline">資訊管理 ｜ 前端開發探索與軟體實作</p>
+          <div className="links">
+            <a href="https://github.com/echidnax" target="_blank" rel="noreferrer" className="pill-link">
+              GitHub ↗
+            </a>
+            <span className="location-tag">Taiwan</span>
+          </div>
+        </header>
 
-      {/* 技能標籤 */}
-      <section className="section">
-        <h2 className="section-title">Skills & Tools</h2>
-        <div className="skills-grid">
-          {skills.map((skill, index) => (
-            <span key={index} className="skill-badge">{skill}</span>
-          ))}
-        </div>
-      </section>
+        {/* 簡介 */}
+        <section className="section">
+          <h2 className="section-heading">About</h2>
+          <p className="bio-text">
+            具備資訊管理背景，具備前後端基礎與資料庫規劃概念。熱衷於現代前端技術、乾淨介面設計與自動化開發流程，樂於從實作中排查問題並持續累積專案經驗。
+          </p>
+        </section>
 
-      {/* 作品卡片 */}
-      <section className="section">
-        <h2 className="section-title">Projects</h2>
-        <div className="projects-grid">
-          {projects.map((item, index) => (
-            <div key={index} className="project-card">
-              <span className="project-tag">{item.tag}</span>
-              <h3>{item.title}</h3>
-              <p>{item.desc}</p>
-              <a href={item.link} className="project-link">查看詳情 →</a>
-            </div>
-          ))}
-        </div>
-      </section>
+        {/* 技能 */}
+        <section className="section">
+          <h2 className="section-heading">Skills</h2>
+          <div className="skills-cloud">
+            {skills.map((skill, index) => (
+              <span key={index} className="skill-pill">{skill}</span>
+            ))}
+          </div>
+        </section>
 
-      {/* 底部與社群 */}
-      <footer className="footer-section">
-        <h2 className="section-title">Contact</h2>
-        <div className="links-group">
-          <a href="https://github.com/echidnax" target="_blank" rel="noreferrer" className="link-btn">GitHub</a>
-          <a href="mailto:your-email@example.com" className="link-btn">Email Me</a>
-        </div>
-        <p className="copyright">© 2026 Ting-Hsuan. Built with React & Vercel.</p>
-      </footer>
+        {/* 專案經歷 */}
+        <section className="section">
+          <h2 className="section-heading">Projects</h2>
+          <div className="projects-grid">
+            {projects.map((proj, index) => (
+              <div key={index} className="project-card">
+                <div className="project-top">
+                  <span className="project-tag">{proj.tag}</span>
+                  <a href={proj.link} className="arrow-link" target="_blank" rel="noreferrer">↗</a>
+                </div>
+                <h3 className="project-title">{proj.title}</h3>
+                <p className="project-desc">{proj.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* 頁尾 */}
+        <footer className="footer">
+          <p>© 2026 Ting-Hsuan. Built with React & Vite.</p>
+        </footer>
+      </main>
     </div>
   )
 }
