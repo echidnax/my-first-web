@@ -1,66 +1,56 @@
+import { useState } from 'react'
 import './App.css'
+import WorkOrder from './WorkOrder'
 
 function App() {
+  // 目前顯示哪一頁：'home'（履歷）或 'mes'（工單系統）
+  const [currentPage, setCurrentPage] = useState('home')
+
   const skills = [
-    { category: '前端開發', items: ['React', 'JavaScript (ES6+)', 'HTML5 / CSS3', 'Vite'] },
-    { category: '後端與資料庫', items: ['Python (Flask)', 'MySQL', 'MongoDB', 'RESTful API'] },
-    { category: '工具與部署', items: ['Git / GitHub', 'VS Code', 'Vercel'] }
+    { category: '核心程式語言', items: ['C', 'Java', 'SQL (MySQL)'] },
+    { category: 'Web 探索與實作', items: ['HTML / CSS', 'JavaScript 基礎', 'React / Vite'] },
+    { category: '開發環境與工具', items: ['VS Code', 'Git / GitHub 基礎操作', 'Windows 終端機'] }
   ]
 
-  const projects = [
-    {
-      title: '個人形象與線上履歷',
-      tag: 'React / Vite / Vercel',
-      desc: '規劃並實作響應式個人站，整合 Git 與 Vercel 自動化 CI/CD 流程，實現即時部署與版本控制。',
-      link: 'https://github.com/echidnax'
-    },
-    {
-      title: '圖書管理系統 (LibraryDB)',
-      tag: 'Flask / MySQL / REST API',
-      desc: '設計關聯式資料庫結構與 DDL，撰寫 Flask 後端 API 串接 MySQL，實作書籍與借閱紀錄之查詢與管理。',
-      link: '#'
-    },
-    {
-      title: '多架構 NoSQL 實作分析',
-      tag: 'MongoDB / DuckDB / Neo4j',
-      desc: '針對 Document、Column 與 Graph 不同架構之資料庫進行資料建模、關聯查詢與資料流演練。',
-      link: '#'
-    }
-  ]
+  // 如果目前切換到 mes，就顯示獨立的 WorkOrder 頁面
+  if (currentPage === 'mes') {
+    return <WorkOrder onBack={() => setCurrentPage('home')} />
+  }
 
+  // 預設顯示履歷首頁
   return (
     <div className="layout">
-      {/* 頂部 Profile 區域 */}
+      {/* 頂部 Header */}
       <header className="profile-header">
         <div className="profile-left">
           <div className="avatar-box">TH</div>
           <div>
-            <h1 className="name">張庭瑄（Ting-Hsuan Chang）</h1>
-            <p className="headline">資訊管理 ｜ 專注前端開發與軟體實作</p>
+            <h1 className="name">張庭瑄 (Ting-Hsuan)</h1>
+            <p className="headline">資訊管理背景 ｜ 專注程式邏輯與 Web 系統開發</p>
             <div className="badge-row">
               <span className="status-dot"></span>
-              <span className="status-text">開放各項技術合作與交流</span>
+              <span className="status-text">積極尋求軟體開發 / MES 全端工程師職位</span>
             </div>
           </div>
         </div>
         <div className="profile-actions">
           <a href="https://github.com/echidnax" target="_blank" rel="noreferrer" className="btn-primary">
-            GitHub ↗
+            GitHub 專案 ↗
           </a>
         </div>
       </header>
 
-      {/* 關於我 */}
+      {/* 簡介 */}
       <section className="card-section">
-        <h2 className="section-label">ABOUT</h2>
+        <h2 className="section-label">ABOUT & OBJECTIVE</h2>
         <p className="about-text">
-          具備資訊工程及資訊管理背景，熟悉前端技術、後端 API 串接與資料庫規劃。重視俐落清晰的介面與流暢的開發流程，善於排查問題並透過專案實作持續迭代技術能力。
+          具備資訊管理背景，主要以 C 與 Java 作為程式邏輯與物件導向基礎，並具備 SQL 資料庫基礎操作概念。習慣動手查資料並排查問題，目前正持續透過實作累積 Web 與系統開發基礎，期望能加入重視邏輯嚴謹性與扎實工程思維的團隊，在實務中持續學習與成長。
         </p>
       </section>
 
-      {/* 專業技能 */}
+      {/* 核心技能 */}
       <section className="card-section">
-        <h2 className="section-label">SKILLS</h2>
+        <h2 className="section-label">TECHNICAL SKILLS</h2>
         <div className="skill-groups">
           {skills.map((group, index) => (
             <div key={index} className="skill-row">
@@ -75,27 +65,46 @@ function App() {
         </div>
       </section>
 
-      {/* 專案經歷 */}
+      {/* 實作專案 */}
       <section className="card-section">
-        <h2 className="section-label">FEATURED PROJECTS</h2>
+        <h2 className="section-label">PROJECTS & PRACTICE</h2>
         <div className="project-grid">
-          {projects.map((proj, index) => (
-            <a key={index} href={proj.link} target="_blank" rel="noreferrer" className="project-card">
-              <div className="project-header">
-                <span className="project-tag">{proj.tag}</span>
-                <span className="arrow-icon">↗</span>
-              </div>
-              <h3 className="project-name">{proj.title}</h3>
-              <p className="project-detail">{proj.desc}</p>
-            </a>
-          ))}
+          
+          {/* 專案一：點擊直接進入工單 Demo */}
+          <div 
+            className="project-card" 
+            onClick={() => setCurrentPage('mes')} 
+            style={{ cursor: 'pointer' }}
+          >
+            <div className="project-header">
+              <span className="project-tag">React / 狀態管理 / 內部後台介面</span>
+              <span className="arrow-icon">進入 Demo ↗</span>
+            </div>
+            <h3 className="project-name">MES 生產工單即時管理系統 (Demo)</h3>
+            <p className="project-detail">
+              模擬現場操作員之日常工單操作流程，包含機台產線指派、輪胎規格新增、生產狀態即時調整（待生產／生產中／已完工）等互動功能。點擊即可直接於網頁操作體驗。
+            </p>
+          </div>
+
+          {/* 專案二：個人網站與 CI/CD */}
+          <div className="project-card">
+            <div className="project-header">
+              <span className="project-tag">React / Vite / Git / Vercel</span>
+              <a href="https://github.com/echidnax" target="_blank" rel="noreferrer" className="arrow-icon">GitHub ↗</a>
+            </div>
+            <h3 className="project-name">個人線上作品集與自動化部署</h3>
+            <p className="project-detail">
+              採用 React 與現代前端建置工具實作乾淨極簡風格頁面，實踐 Git 版本控制與 Vercel 自動化發布流程，並落實本機開發與雲端託管整合。
+            </p>
+          </div>
+
         </div>
       </section>
 
       {/* 頁尾 */}
       <footer className="footer">
-        <span>© 2026 Ting-Hsuan</span>
-        <span className="footer-built">Crafted with React & Vite</span>
+        <span>© 2026 張庭瑄 (Ting-Hsuan)</span>
+        <span className="footer-built">React & Vite Workflow</span>
       </footer>
     </div>
   )
