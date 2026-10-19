@@ -6,9 +6,9 @@ function App() {
   const [currentPage, setCurrentPage] = useState('home')
 
   const skills = [
-    { category: '核心程式語言', items: ['C', 'Java', 'SQL (MySQL)'] },
-    { category: 'Web 探索與實作', items: ['HTML / CSS', 'JavaScript 基礎', 'React / Vite'] },
-    { category: '開發環境與工具', items: ['VS Code', 'Git / GitHub 基礎操作', 'Windows 終端機'] }
+    { category: 'Languages', items: ['C', 'Java', 'SQL (MySQL)'] },
+    { category: 'Web & Frontend', items: ['JavaScript (ES6+)', 'React', 'HTML / CSS', 'Vite'] },
+    { category: 'Environment & Tools', items: ['Git / GitHub', 'VS Code', 'Windows Terminal'] }
   ]
 
   if (currentPage === 'mes') {
@@ -16,106 +16,109 @@ function App() {
   }
 
   return (
-    <div className="portfolio-wrapper">
-      <div className="portfolio-container">
+    <div className="site-wrapper">
+      <main className="site-content">
         
-        {/* 左側固定/資訊欄 */}
-        <aside className="sidebar">
-          <div>
-            <div className="avatar-box">TH</div>
-            <h1 className="name">張庭瑄</h1>
-            <p className="en-name">Ting-Hsuan</p>
-            <p className="headline">資訊管理背景 ｜ 專注程式邏輯與系統實作</p>
-            
-            <div className="badge-status">
+        {/* 頂部 Header：姓名與基本定位 */}
+        <header className="hero-header">
+          <div className="hero-top">
+            <div>
+              <h1 className="hero-name">張庭瑄</h1>
+              <p className="hero-sub">Ting-Hsuan Chang</p>
+            </div>
+            <div className="status-pill">
               <span className="status-dot"></span>
-              <span>開放軟體開發 / 內部系統相關職位</span>
-            </div>
-
-            <div className="sidebar-intro">
-              <h2 className="section-title">ABOUT</h2>
-              <p className="intro-text">
-                具備資訊管理背景，主要以 C 與 Java 作為程式邏輯與物件導向基礎，並具備 SQL 資料庫基礎操作概念。習慣動手查資料並排查問題，目前正持續透過實作累積 Web 與系統開發基礎，期望能加入重視邏輯嚴謹性與扎實工程思維的團隊，在實務中持續學習與成長。
-              </p>
-            </div>
-
-            <div className="sidebar-skills">
-              <h2 className="section-title">TECHNICAL SKILLS</h2>
-              {skills.map((group, index) => (
-                <div key={index} className="skill-group">
-                  <div className="skill-cat-name">{group.category}</div>
-                  <div className="skill-tags">
-                    {group.items.map((item, i) => (
-                      <span key={i} className="skill-tag">{item}</span>
-                    ))}
-                  </div>
-                </div>
-              ))}
+              <span>Available for Work</span>
             </div>
           </div>
-
-          <div className="sidebar-footer">
-            <a href="https://github.com/echidnax" target="_blank" rel="noreferrer" className="btn-github">
-              GitHub 專案庫 ↗
+          <p className="hero-bio">
+            資訊管理背景。主要以 <strong>C</strong> 與 <strong>Java</strong> 建立程式邏輯與物件導向基礎，具備關聯式資料庫（SQL）概念。目前專注於網頁前端技術與內部系統介面實作，注重嚴謹邏輯與乾淨易讀的程式結構。
+          </p>
+          <div className="hero-links">
+            <a href="https://github.com/echidnax" target="_blank" rel="noreferrer" className="link-item">
+              GitHub ↗
             </a>
           </div>
-        </aside>
+        </header>
 
-        {/* 右側專案展示區 */}
-        <main className="main-content">
-          <div className="content-header">
-            <h2 className="section-title">PROJECTS & PRACTICE</h2>
-            <p className="section-subtitle">點擊卡片可直接檢視詳細內容或操作即時互動 Demo</p>
+        <div className="divider"></div>
+
+        {/* 精選專案區塊 */}
+        <section className="section-block">
+          <div className="section-header">
+            <h2 className="section-title">Projects & Practice</h2>
+            <span className="section-hint">實作專案與互動 Demo</span>
           </div>
 
-          <div className="projects-list">
-            {/* 專案一：內部後台 Demo */}
+          <div className="project-list">
+            {/* 專案一：內部管理後台 Demo */}
             <div 
-              className="project-card highlight-card" 
+              className="project-row" 
               onClick={() => setCurrentPage('mes')}
             >
-              <div className="project-badge-row">
-                <span className="tag-interactive">可互動 Demo</span>
-                <span className="project-stack">React / 狀態管理 / 內部後台</span>
-              </div>
-              <div className="card-body">
-                <div className="card-title-row">
-                  <h3 className="project-title">簡易內部管理後台 (Admin Dashboard Demo)</h3>
-                  <span className="enter-link">進入操作 ↗</span>
+              <div className="project-main">
+                <div className="project-title-row">
+                  <h3 className="project-title">內部品項與工單管理後台</h3>
+                  <span className="badge-demo">Live Demo ↗</span>
                 </div>
                 <p className="project-desc">
-                  練習現代前端狀態管理與互動介面之實作專案。實現基礎品項新增、條件檢視與狀態自由切換（待處理／處理中／已結案）等常見內部管理後台操作流程。
+                  模擬內部管理流程之互動介面。使用 React 狀態管理實作品項新增、狀態即時切換（待處理／處理中／已結案）與資料異動操作。
                 </p>
+                <div className="project-tech">React · State Management · Admin UI</div>
               </div>
             </div>
 
-            {/* 專案二：個人網站與 CI/CD */}
-            <div className="project-card">
-              <div className="project-badge-row">
-                <span className="tag-deploy">線上部署</span>
-                <span className="project-stack">React / Vite / Git / Vercel</span>
-              </div>
-              <div className="card-body">
-                <div className="card-title-row">
-                  <h3 className="project-title">個人線上作品集與自動化部署</h3>
-                  <a href="https://github.com/echidnax" target="_blank" rel="noreferrer" className="enter-link">
-                    查看原始碼 ↗
-                  </a>
+            {/* 專案二：個人作品集與自動化部署 */}
+            <a 
+              href="https://github.com/echidnax" 
+              target="_blank" 
+              rel="noreferrer" 
+              className="project-row"
+            >
+              <div className="project-main">
+                <div className="project-title-row">
+                  <h3 className="project-title">個人作品集與自動化部署</h3>
+                  <span className="badge-code">Source Code ↗</span>
                 </div>
                 <p className="project-desc">
-                  採用 React 與現代前端建置工具實作雙欄工程師風格頁面，實踐 Git 版本控制與 Vercel 自動化發布流程，並落實本機開發與雲端託管整合。
+                  以 React 與 Vite 建置之極簡風格個人站。實踐 Git 版本控制流程與 Vercel 自動化 CI/CD 雲端部署。
                 </p>
+                <div className="project-tech">React · Vite · Git Workflow · Vercel</div>
               </div>
-            </div>
+            </a>
+          </div>
+        </section>
+
+        <div className="divider"></div>
+
+        {/* 技術背景區塊 */}
+        <section className="section-block">
+          <div className="section-header">
+            <h2 className="section-title">Technical Skills</h2>
+            <span className="section-hint">技術底子與工具</span>
           </div>
 
-          <footer className="main-footer">
-            <span>© 2026 張庭瑄 (Ting-Hsuan)</span>
-            <span>React & Vite Workflow</span>
-          </footer>
-        </main>
+          <div className="skills-grid">
+            {skills.map((group, index) => (
+              <div key={index} className="skill-col">
+                <h4 className="skill-cat-title">{group.category}</h4>
+                <div className="skill-pills">
+                  {group.items.map((item, i) => (
+                    <span key={i} className="skill-tag">{item}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
 
-      </div>
+        {/* 簡約頁尾 */}
+        <footer className="site-footer">
+          <span>© 2026 Ting-Hsuan Chang</span>
+          <span>Crafted with React</span>
+        </footer>
+
+      </main>
     </div>
   )
 }
