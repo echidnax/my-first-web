@@ -1,72 +1,82 @@
 import React, { useState } from 'react'
+import './WorkOrder.css' 
 
 export default function WorkOrder({ onBack }) {
-  // 模擬工廠內部的初始工單資料
-  const [orders, setOrders] = useState([
-    { id: 'WO-2026-001', model: 'KR201 轎車胎 215/55R17', line: '機台 A-01', qty: 120, status: '生產中' },
-    { id: 'WO-2026-002', model: 'KR50 休旅胎 225/65R17', line: '機台 B-03', qty: 80, status: '待生產' },
-    { id: 'WO-2026-003', model: 'K117 自行車競速胎 700x25C', line: '機台 C-02', qty: 300, status: '已完工' },
+  // 通用練習用假資料：日常辦公用品
+  const [items, setItems] = useState([
+    { id: 'ITEM-01', name: '27 吋電腦螢幕', category: '辦公設備', qty: 2, status: '處理中' },
+    { id: 'ITEM-02', name: '無線鍵盤滑鼠組', category: '電腦周邊', qty: 5, status: '待處理' },
+    { id: 'ITEM-03', name: 'A4 影印紙 (箱)', category: '耗材用品', qty: 20, status: '已結案' },
   ])
 
-  const [newModel, setNewModel] = useState('')
-  const [newLine, setNewLine] = useState('機台 A-01')
+  const [newName, setNewName] = useState('')
+  const [newCategory, setNewCategory] = useState('辦公設備')
   const [newQty, setNewQty] = useState('')
 
-  // 調整工單狀態
+  // 狀態任意切換（按錯隨時可以改回來）
   const handleStatusChange = (id, newStatus) => {
-    setOrders(orders.map(order => 
-      order.id === id ? { ...order, status: newStatus } : order
+    setItems(items.map(item => 
+      item.id === id ? { ...item, status: newStatus } : item
     ))
   }
 
-  // 新增工單
-  const handleAddOrder = (e) => {
-    e.preventDefault()
-    if (!newModel || !newQty) return
+  // 刪除項目
+  const handleDeleteItem = (id) => {
+    setItems(items.filter(item => item.id !== id))
+  }
 
-    const newOrder = {
-      id: `WO-2026-00${orders.length + 1}`,
-      model: newModel,
-      line: newLine,
+  // 新增品項
+  const handleAddItem = (e) => {
+    e.preventDefault()
+    if (!newName || !newQty) return
+
+    const nextNumber = items.length > 0 
+      ? Math.max(...items.map(i => parseInt(i.id.replace('ITEM-', '')) || 0)) + 1 
+      : 1
+
+    const newItem = {
+      id: `ITEM-${String(nextNumber).padStart(2, '0')}`,
+      name: newName,
+      category: newCategory,
       qty: Number(newQty),
-      status: '待生產'
+      status: '待處理'
     }
 
-    setOrders([...orders, newOrder])
-    setNewModel('')
+    setItems([...items, newItem])
+    setNewName('')
     setNewQty('')
   }
 
   return (
     <div className="layout">
-      {/* 獨立頁面的頂部導航列 */}
+      {/* 頂部導航列 */}
       <div className="demo-nav">
         <button onClick={onBack} className="btn-back">
           ← 返回個人履歷
         </button>
-        <span className="demo-badge">Live Interactive Demo</span>
+        <span className="demo-badge">React Interactive Demo</span>
       </div>
 
       <div className="mes-container">
         <div className="mes-header">
-          <h2 className="mes-title">🏭 MES 工單即時管理系統 Demo</h2>
-          <p className="mes-sub">模擬現場操作員「隨行查詢、派工與狀態調整」之後台操作流程</p>
+          <h2 className="mes-title">內部品項與工單管理後台 (Demo)</h2>
+          <p className="mes-sub">練習 React 狀態管理與常見內部後台清單操作（新增、狀態切換、移除）</p>
         </div>
 
-        {/* 新增工單表單 */}
-        <form onSubmit={handleAddOrder} className="mes-form">
+        {/* 新增品項表單 */}
+        <form onSubmit={handleAddItem} className="mes-form">
           <input 
             type="text" 
-            placeholder="輪胎型號 (例: KR201 215/55R17)" 
-            value={newModel} 
-            onChange={(e) => setNewModel(e.target.value)}
+            placeholder="品項名稱 (例: 延長線)" 
+            value={newName} 
+            onChange={(e) => setNewName(e.target.value)}
             className="mes-input"
             required
           />
-          <select value={newLine} onChange={(e) => setNewLine(e.target.value)} className="mes-select">
-            <option value="機台 A-01">機台 A-01</option>
-            <option value="機台 B-03">機台 B-03</option>
-            <option value="機台 C-02">機台 C-02</option>
+          <select value={newCategory} onChange={(e) => setNewCategory(e.target.value)} className="mes-select">
+            <option value="辦公設備">辦公設備</option>
+            <option value="電腦周邊">電腦周邊</option>
+            <option value="耗材用品">耗材用品</option>
           </select>
           <input 
             type="number" 
@@ -76,51 +86,66 @@ export default function WorkOrder({ onBack }) {
             className="mes-input-sm"
             required
           />
-          <button type="submit" className="mes-btn-submit">＋ 建立派工</button>
+          <button type="submit" className="mes-btn-submit">＋ 新增品項</button>
         </form>
 
-        {/* 工單列表表格 */}
+        {/* 清單表格 */}
         <div className="mes-table-wrap">
           <table className="mes-table">
             <thead>
               <tr>
-                <th>工單號碼</th>
-                <th>規格型號</th>
-                <th>產線機台</th>
-                <th>目標數量</th>
+                <th>編號</th>
+                <th>品項名稱</th>
+                <th>分類</th>
+                <th>數量</th>
                 <th>目前狀態</th>
-                <th>操作</th>
+                <th>操作 / 變更狀態</th>
               </tr>
             </thead>
             <tbody>
-              {orders.map((order) => (
-                <tr key={order.id}>
-                  <td className="font-mono">{order.id}</td>
-                  <td>{order.model}</td>
-                  <td>{order.line}</td>
-                  <td>{order.qty} 條</td>
+              {items.map((item) => (
+                <tr key={item.id}>
+                  <td className="font-mono">{item.id}</td>
+                  <td>{item.name}</td>
+                  <td>{item.category}</td>
+                  <td>{item.qty}</td>
                   <td>
-                    <span className={`status-tag status-${order.status}`}>
-                      {order.status}
+                    <span className={`status-tag status-${item.status}`}>
+                      {item.status}
                     </span>
                   </td>
                   <td>
-                    {order.status === '待生產' && (
-                      <button onClick={() => handleStatusChange(order.id, '生產中')} className="btn-action">
-                        開始生產
+                    <div className="action-cell">
+                      {/* 下拉選單：隨時可切換狀態，按錯也能換回來 */}
+                      <select 
+                        value={item.status} 
+                        onChange={(e) => handleStatusChange(item.id, e.target.value)}
+                        className="status-dropdown"
+                      >
+                        <option value="待處理">待處理</option>
+                        <option value="處理中">處理中</option>
+                        <option value="已結案">已結案</option>
+                      </select>
+
+                      {/* 刪除按鈕 */}
+                      <button 
+                        onClick={() => handleDeleteItem(item.id)} 
+                        className="btn-delete"
+                        title="刪除品項"
+                      >
+                        ✕
                       </button>
-                    )}
-                    {order.status === '生產中' && (
-                      <button onClick={() => handleStatusChange(order.id, '已完工')} className="btn-action btn-complete">
-                        報工完工
-                      </button>
-                    )}
-                    {order.status === '已完工' && (
-                      <span className="text-done">已結案</span>
-                    )}
+                    </div>
                   </td>
                 </tr>
               ))}
+              {items.length === 0 && (
+                <tr>
+                  <td colSpan="6" style={{ textAlign: 'center', color: '#94a3b8', padding: '24px' }}>
+                    目前無品項資料，請從上方新增。
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>
