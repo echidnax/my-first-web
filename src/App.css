@@ -1,289 +1,490 @@
 :root {
   --bg-page: #f8fafc;
   --bg-card: #ffffff;
-  --text-main: #0f172a;
-  --text-body: #334155;
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
   --text-muted: #64748b;
-  --text-light: #94a3b8;
-  --border-color: #e2e8f0;
-  --accent: #2563eb;
+  --border-light: #e2e8f0;
+  --border-hover: #cbd5e1;
+  --accent-blue: #2563eb;
+  --accent-light: #eff6ff;
+  --accent-green: #059669;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
+  margin: 0;
+  padding: 0;
   background-color: var(--bg-page);
-  color: var(--text-body);
+  color: var(--text-secondary);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 
-/* 外層容器：由上而下自然流動，靠上對齊，寬度放寬至 840px */
-.site-wrapper {
-  min-height: 100vh;
-  width: 100%;
-  padding: 80px 24px 100px;
+/* 頂部導航列 */
+.site-nav {
+  position: sticky;
+  top: 0;
+  background: rgba(248, 250, 252, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-light);
+  z-index: 50;
 }
 
-.site-content {
-  width: 100%;
-  max-width: 840px;
+.nav-container {
+  max-width: 900px;
   margin: 0 auto;
-  text-align: left;
-}
-
-/* 頂部 Header */
-.hero-header {
-  margin-bottom: 32px;
-}
-
-.hero-top {
+  padding: 14px 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
 }
 
-.hero-name {
-  font-size: 2.2rem;
+.nav-logo {
   font-weight: 800;
-  letter-spacing: -0.03em;
-  margin: 0 0 4px 0;
-  color: var(--text-main);
-  line-height: 1.2;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
 }
 
-.hero-sub {
-  font-size: 1rem;
-  color: var(--text-muted);
-  margin: 0;
+.nav-links {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-size: 0.88rem;
   font-weight: 500;
+  color: var(--text-muted);
+  transition: color 0.15s;
 }
 
-.status-pill {
+.nav-links a:hover {
+  color: var(--text-primary);
+}
+
+.nav-btn-contact {
+  padding: 5px 12px;
+  background: #0f172a;
+  color: #ffffff !important;
+  border-radius: 6px;
+  font-size: 0.82rem !important;
+}
+
+/* 1. Hero 區塊：現代工程幾何網格背景（免額外圖片檔案） */
+.hero-section {
+  padding: 80px 24px 64px;
+  background-color: #ffffff;
+  background-image: radial-gradient(#e2e8f0 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.hero-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.status-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   font-size: 0.8rem;
-  font-weight: 500;
-  color: #047857;
+  font-weight: 600;
+  color: var(--accent-green);
   background: #ecfdf5;
   border: 1px solid #a7f3d0;
-  padding: 6px 14px;
+  padding: 5px 14px;
   border-radius: 999px;
+  margin-bottom: 24px;
 }
 
 .status-dot {
   width: 7px;
   height: 7px;
-  background: #10b981;
+  background-color: #10b981;
   border-radius: 50%;
 }
 
-.hero-bio {
-  font-size: 1rem;
+.hero-title {
+  font-size: 2.3rem;
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  margin: 0 0 20px 0;
+}
+
+.hero-subtitle {
+  font-size: 1.05rem;
   line-height: 1.8;
-  color: var(--text-body);
-  margin: 0 0 16px 0;
-  text-align: left;
+  color: var(--text-secondary);
+  max-width: 760px;
+  margin: 0 0 28px 0;
 }
 
-.hero-bio strong {
-  color: var(--text-main);
-  font-weight: 600;
-}
-
-.hero-links {
+.hero-actions {
   display: flex;
-  gap: 16px;
+  gap: 14px;
 }
 
-.link-item {
-  font-size: 0.9rem;
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  background: #0f172a;
+  color: #ffffff;
+  font-size: 0.92rem;
   font-weight: 600;
-  color: var(--text-main);
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  text-decoration-color: var(--border-color);
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 8px;
   transition: all 0.2s;
 }
 
-.link-item:hover {
-  text-decoration-color: var(--text-main);
+.btn-primary:hover {
+  background: #1e293b;
+  transform: translateY(-1px);
 }
 
-/* 分割線 */
-.divider {
-  height: 1px;
-  background-color: var(--border-color);
-  margin: 40px 0;
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  background: #ffffff;
+  color: var(--text-primary);
+  border: 1px solid var(--border-light);
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: all 0.2s;
 }
 
-/* 區塊標題 */
-.section-block {
-  margin-bottom: 32px;
-  text-align: left;
+.btn-secondary:hover {
+  background: #f8fafc;
+  border-color: var(--border-hover);
+  transform: translateY(-1px);
 }
 
-.section-header {
+/* 主內容區 */
+.main-body {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 64px 24px 80px;
+}
+
+.content-section {
+  margin-bottom: 56px;
+}
+
+.section-title-wrap {
   display: flex;
-  justify-content: space-between;
   align-items: baseline;
-  margin-bottom: 16px;
+  gap: 12px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 10px;
 }
 
 .section-title {
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--text-primary);
   margin: 0;
-  color: var(--text-main);
+  letter-spacing: -0.02em;
 }
 
-.section-hint {
-  font-size: 0.85rem;
+.section-en {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   color: var(--text-muted);
 }
 
-/* 專案列表 */
-.project-list {
+/* 2. 關於我 */
+.about-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  padding: 24px 28px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
+.about-card p:first-child {
+  margin-top: 0;
+}
+.about-card p:last-child {
+  margin-bottom: 0;
+}
+
+/* 3. 作品展示卡片 */
+.projects-grid {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.project-row {
+.project-card {
   display: block;
   text-decoration: none;
-  background: #ffffff;
-  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-left: 4px solid #cbd5e1;
   border-radius: 12px;
   padding: 24px 28px;
-  cursor: pointer;
-  text-align: left;
   transition: all 0.2s ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
 }
 
-.project-row:hover {
-  border-color: #cbd5e1;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
-  transform: translateY(-1px);
+.highlight-card {
+  cursor: pointer;
 }
 
-.project-title-row {
+.project-card:hover {
+  border-left-color: var(--accent-blue);
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -4px rgba(15, 23, 42, 0.06);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.tag-live {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent-blue);
+  background: var(--accent-light);
+  border: 1px solid #bfdbfe;
+  padding: 3px 10px;
+  border-radius: 6px;
+}
+
+.tag-db, .tag-cloud {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: #f1f5f9;
+  border: 1px solid var(--border-light);
+  padding: 3px 10px;
+  border-radius: 6px;
+}
+
+.card-action {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-blue);
+}
+
+.card-action-muted {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 8px 0;
+}
+
+.card-desc {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin: 0 0 16px 0;
+}
+
+.card-tech {
+  font-size: 0.8rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  color: var(--text-muted);
+  background: #f8fafc;
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border-light);
+}
+
+/* 技能 */
+.skills-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  padding: 24px 28px;
+}
+
+.skill-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.skill-category {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  width: 160px;
+  flex-shrink: 0;
+}
+
+.skill-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-badge {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  background: #f8fafc;
+  border: 1px solid var(--border-light);
+  padding: 4px 12px;
+  border-radius: 6px;
+}
+
+/* 學歷 */
+.edu-container {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.edu-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  padding: 22px 26px;
+}
+
+.edu-head {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 8px;
 }
 
-.project-title {
-  font-size: 1.12rem;
-  font-weight: 700;
-  color: var(--text-main);
-  margin: 0;
-}
-
-.badge-demo {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: #2563eb;
-  background: #eff6ff;
-  padding: 4px 10px;
-  border-radius: 6px;
-}
-
-.badge-code {
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: var(--text-muted);
-  background: #f1f5f9;
-  padding: 4px 10px;
-  border-radius: 6px;
-}
-
-.project-desc {
-  font-size: 0.92rem;
-  line-height: 1.7;
-  color: var(--text-muted);
-  margin: 0 0 14px 0;
-  text-align: left;
-}
-
-.project-tech {
-  font-size: 0.82rem;
-  color: var(--text-light);
-  font-family: monospace;
-  text-align: left;
-}
-
-/* 技能排版 */
-.skills-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  background: #ffffff;
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 24px 28px;
-  text-align: left;
-}
-
-.skill-col {
+.edu-titles {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 12px;
 }
 
-.skill-cat-title {
-  font-size: 0.88rem;
-  font-weight: 600;
+.edu-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.edu-dept {
+  font-size: 0.9rem;
   color: var(--text-muted);
+}
+
+.edu-status {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent-green);
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.edu-text {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
   margin: 0;
-  width: 170px;
-  flex-shrink: 0;
-  text-align: left;
 }
 
-.skill-pills {
+/* 4. 聯絡方式 */
+.contact-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  padding: 28px;
+}
+
+.contact-intro {
+  margin: 0 0 20px 0;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.contact-links {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.skill-tag {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--text-main);
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
   background: #f8fafc;
-  border: 1px solid var(--border-color);
-  padding: 4px 12px;
-  border-radius: 6px;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.contact-type {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  width: 80px;
+}
+
+.contact-detail {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
 }
 
 /* 頁尾 */
 .site-footer {
-  margin-top: 60px;
-  display: flex;
-  justify-content: space-between;
+  border-top: 1px solid var(--border-light);
+  padding: 32px 24px;
+  text-align: center;
   font-size: 0.85rem;
-  color: var(--text-light);
+  color: var(--text-muted);
 }
 
-@media (max-width: 640px) {
-  .site-wrapper {
-    padding: 40px 16px;
+/* 響應式優化 */
+@media (max-width: 680px) {
+  .hero-title {
+    font-size: 1.8rem;
   }
-  .hero-top {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
+  .nav-links {
+    display: none;
   }
-  .skill-col {
+  .skill-row {
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
   }
-  .skill-cat-title {
+  .skill-category {
     width: auto;
   }
 }
