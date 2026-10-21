@@ -330,3 +330,107 @@
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* 系統資料流視覺化節點圖 */
+.flow-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 28px 20px;
+}
+
+.flow-node {
+  width: 100%;
+  max-width: 520px;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 14px 18px;
+  text-align: center;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+.flow-node.highlight {
+  background: #eff6ff;
+  border-color: #93c5fd;
+}
+
+.flow-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.flow-node.highlight .flow-tag {
+  color: #2563eb;
+}
+
+.flow-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.flow-desc {
+  font-size: 0.82rem;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+.flow-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 8px 0;
+}
+
+.arrow-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #94a3b8;
+  background: #f8fafc;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.arrow-head {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  line-height: 1;
+}
+
+.flow-split-arrow {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 520px;
+  margin: 10px 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.flow-bottom-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  width: 100%;
+  max-width: 520px;
+}
+
+.flow-node.sub-node {
+  max-width: none;
+}
+
+@media (max-width: 600px) {
+  .flow-bottom-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import './App.css'
 import WorkOrder from './WorkOrder'
+import ApiDesign from './ApiDesign'
+import ApiPractice from './ApiPractice'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home')
@@ -28,6 +30,9 @@ function App() {
 
   if (currentPage === 'mes') {
     return <WorkOrder onBack={() => setCurrentPage('home')} />
+  }
+  if (currentPage === 'api') {
+    return <ApiDesign onBack={() => setCurrentPage('home')} />
   }
 
   return (
@@ -68,6 +73,7 @@ function App() {
       </header>
 
       <main className="main-body">
+        <ApiPractice />
         {/* 2. 關於我 (About) */}
         <section id="about" className="content-section">
           <div className="section-title-wrap">
@@ -104,11 +110,14 @@ function App() {
               <div className="card-tech">React · State Management · Admin UI Flow · CRUD Logic</div>
             </div>
 
-            {/* 專案二：設備點位通訊與 API 交換系統設計（精準命中工作需求） */}
-            <div className="project-card">
+            {/* 專案二：設備點位通訊監控與資料交換 API 系統設計 */}
+            <div 
+              className="project-card highlight-card" 
+              onClick={() => setCurrentPage('api')}
+            >
               <div className="card-header">
                 <span className="tag-db">Backend & Data Flow</span>
-                <span className="card-action-muted">系統設計架構</span>
+                <span className="card-action">查看系統架構 ↗</span>
               </div>
               <h3 className="card-title">設備點位通訊監控與資料交換 API 系統設計</h3>
               <p className="card-desc">
